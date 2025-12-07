@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import type { Metadata } from "next";
+import { Varela_Round } from "next/font/google";
+import Hero from "@/components/Hero";
+import Footer from "@/components/layouts/Footer";
+import Navbar from "@/components/layouts/Navbar";
+import Mouse from "@/components/mouseFollower/MouseFollower";
+import UpdateFollower from "@/components/mouseFollower/UpdateFollower";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const varelaRound = Varela_Round({
+  variable: "--font-varela-round",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -23,11 +24,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className="scroll-smooth">
+      <body className={`${varelaRound.variable} antialiased`}>
+        <Mouse />
+
+        <UpdateFollower
+          mouseOptions={{
+            backgroundColor: "white",
+            zIndex: 999,
+            followSpeed: 1.5,
+          }}
+        >
+          <Navbar />
+          <Hero />
+        </UpdateFollower>
+
+        <UpdateFollower
+          mouseOptions={{
+            backgroundColor: "black",
+            zIndex: 999,
+            followSpeed: 1.5,
+          }}
+        >
+          <main>{children}</main>
+          <Footer />
+        </UpdateFollower>
       </body>
     </html>
   );
