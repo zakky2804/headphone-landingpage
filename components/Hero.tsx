@@ -1,7 +1,7 @@
 "use client";
 
 import type { Variants } from "framer-motion";
-import { AnimatePresence, easeInOut, motion } from "framer-motion";
+import { AnimatePresence, easeInOut } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -9,6 +9,7 @@ import { UpdateFollower } from "react-mouse-follower";
 import { heroData } from "@/assets/data";
 import type { HeroData } from "@/types";
 import WhatsupIcon from "@/ui/icons/WhatsupIcon";
+import Animation from "./Animation";
 
 const fadeUp = (delay: number): Variants => {
   return {
@@ -63,7 +64,8 @@ const Hero = () => {
                   scale: 10,
                 }}
               >
-                <motion.h1
+                <Animation
+                  tag="h1"
                   key={activeData.id}
                   variants={fadeUp(0.2)}
                   initial="hidden"
@@ -72,12 +74,13 @@ const Hero = () => {
                   className="text-3xl lg:text-6xl font-bold font-varela-round"
                 >
                   {activeData.title}
-                </motion.h1>
+                </Animation>
               </UpdateFollower>
             </AnimatePresence>
 
             <AnimatePresence mode="wait">
-              <motion.p
+              <Animation
+                tag="p"
                 key={activeData.id}
                 variants={fadeUp(0.3)}
                 initial="hidden"
@@ -86,7 +89,7 @@ const Hero = () => {
                 className="text-sm leading-loose text-brand-dark-foreground/80"
               >
                 {activeData.subtitle}
-              </motion.p>
+              </Animation>
             </AnimatePresence>
 
             <AnimatePresence mode="wait">
@@ -110,25 +113,26 @@ const Hero = () => {
                   ),
                 }}
               >
-                <motion.button
+                <Animation
+                  tag="button"
                   key={activeData.id}
                   variants={fadeUp(0.4)}
                   initial="hidden"
                   animate={"show"}
                   exit={"exit"}
                   className="px-4 py-2 font-varela-round font-medium w-fit rounded"
-                  type="button"
                   style={{
                     backgroundColor: activeData.bgColor,
                   }}
                 >
                   Buy and Listen
-                </motion.button>
+                </Animation>
               </UpdateFollower>
             </AnimatePresence>
 
             {/* Headphone list separator */}
-            <motion.div
+            <Animation
+              tag="div"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.2, ease: easeInOut }}
@@ -139,10 +143,11 @@ const Hero = () => {
                 TOP HEADPHONES FOR YOU
               </p>
               <div className="w-20 h-px bg-white" />
-            </motion.div>
+            </Animation>
 
             {/* Headphone list switcher */}
-            <motion.div
+            <Animation
+              tag="div"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, delay: 0.2, ease: easeInOut }}
@@ -186,14 +191,15 @@ const Hero = () => {
                   </button>
                 </UpdateFollower>
               ))}
-            </motion.div>
+            </Animation>
           </div>
         </div>
 
         {/* Hero image */}
         <div className="flex flex-col justify-end items-center">
           <AnimatePresence mode="wait">
-            <motion.div
+            <Animation
+              tag="div"
               key={activeData.id}
               initial={{ opacity: 0, scale: 0.9, y: 100 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -217,7 +223,7 @@ const Hero = () => {
                 priority={true}
                 quality={80}
               />
-            </motion.div>
+            </Animation>
           </AnimatePresence>
         </div>
 
